@@ -42,7 +42,6 @@ Plug 'https://github.com/terryma/vim-multiple-cursors' " CTRL + N for multiple c
 Plug 'https://github.com/nathangrigg/vim-beancount'
 Plug 'https://github.com/kien/ctrlp.vim'
 Plug 'https://github.com/neovim/nvim-lspconfig'
-Plug 'https://github.com/neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Rust
@@ -233,7 +232,6 @@ local lsp_config = require('lspconfig')
 local servers = {
     pyright = {},
     rust_analyzer = {},
-    solargraph = {},
     eslint = {
       cmd = { "node_modules/vscode-langservers-extracted/bin/vscode-eslint-language-server", "--stdio" },
       on_attach = function(client, bufnr)
