@@ -44,6 +44,9 @@ Plug 'https://github.com/kien/ctrlp.vim'
 Plug 'https://github.com/neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
+Plug 'https://github.com/williamboman/mason.nvim'
+Plug 'https://github.com/williamboman/mason-lspconfig.nvim'
+
 " Rust
 " Plug 'https://github.com/williamboman/mason.nvim'
 " Plug 'https://github.com/williamboman/mason-lspconfig.nvim'
@@ -81,7 +84,6 @@ nnoremap <C-t> :Neotree toggle<CR>
 nmap <F8> :TagbarToggle<CR>
 
 
-nnoremap <C-g> :call CocActionAsync('jumpDefinition')<CR>
 " nnoremap <C-d> :lua vim.lsp.buf.definition()<CR>
 
 " colorscheme gruvbox
@@ -102,19 +104,17 @@ let @" = expand("%")
 
 autocmd BufNewFile,BufRead *.ofx set syntax=xml
 
-" à remettre dans la section lua ?
-" require("mason").setup({
-"     ui = {
-"         icons = {
-"             package_installed = "",
-"             package_pending = "",
-"             package_uninstalled = "",
-"         },
-"     }
-" })
-" require("mason-lspconfig").setup()
-
 lua << EOF
+require("mason").setup({
+    ui = {
+        icons = {
+            package_installed = "",
+            package_pending = "",
+            package_uninstalled = "",
+        },
+    }
+})
+require("mason-lspconfig").setup()
 require'lualine'.setup({
     sections = {
         lualine_a = {'mode'},
