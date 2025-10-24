@@ -14,11 +14,11 @@ set softtabstop=4 " sets 4 spaces when tab or backspace is pressed
 
 set number
 set list listchars=tab:→\ ,trail:•,nbsp:¬
-let mapleader = ","
+let mapleader = " "
 
 
 " Press Space to turn off highlighting and clear any message already displayed.
-nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+nnoremap <silent> <Leader><Space> :nohlsearch<Bar>:echo<CR>
 
 call plug#begin('~/.config/nvim/plugged')
 " Plug 'https://github.com/preservim/nerdtree' " File explorer
@@ -70,6 +70,12 @@ Plug 'https://github.com/hrsh7th/nvim-cmp'
 " for vnsip users
 Plug 'https://github.com/hrsh7th/cmp-vsnip'
 Plug 'https://github.com/hrsh7th/vim-vsnip'
+
+" Plugin principal Telescope avec branche spécifique
+Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
+
+" Extension fzf avec compilation automatique
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 call plug#end()
 
 let g:ctrlp_working_path_mode = 'ra'
@@ -103,6 +109,7 @@ let @s = ':autocmd TextChanged,TextChangedI <buffer> silent write'
 let @" = expand("%")
 
 autocmd BufNewFile,BufRead *.ofx set syntax=xml
+autocmd BufNewFile,BufRead *.js.erb set filetype=javascript
 
 lua << EOF
 require("mason").setup({
@@ -256,8 +263,8 @@ local servers = {
               "semanticHighlighting",
               "formatting",
               "codeActions",
-            },
-          },
+            }
+        },
     },
 }
 for server, config in pairs(servers) do
@@ -265,6 +272,26 @@ for server, config in pairs(servers) do
     config.capabilities = capabilities
     lsp_config[server].setup(config)
 end
+
+local telescope = require("telescope")
+local actions = require("telescope.actions")
+
+telescope.setup({
+  defaults = {
+    prompt_prefix = " ",
+    path_display = { "smart" },
+    file_ignore_patterns = { ".git/", "node_modules" },
+
+    mappings = {
+      i = {
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
+      },
+    },
+  },
+})
+
+telescope.load_extension("fzf")
 EOF
 
 set signcolumn=yes
@@ -272,3 +299,15 @@ autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 
 " Highlight NonText (special charaters) avec treesitter
 highlight NonText guifg=#e06c75 guibg=NONE gui=bold
+
+" Configuration des raccourcis clavier pour Telescope
+" Recherche de chaînes de caractères dans les noms de fichiers
+nnoremap <leader>ff :Telescope find_files<CR>
+" Recherche de chaînes de caractères dans le contenu des fichiers
+nnoremap <leader>fg :Telescope live_grep<CR>
+" Recherche de chaînes de caractères dans les noms de buffers
+nnoremap <leader>fb :Telescope buffers<CR>
+" Recherche de la chaîne de caractères sous le curseur
+nnoremap <leader>f* :Telescope grep_string<CR>
+" Telescope: Recherche dans le help
+nnoremap <leader>fh :Telescope help_tags<CR>
