@@ -62,3 +62,11 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   end,
 })
 
+-- Colore les espaces en fin de ligne et insécables en warning
+vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
+  callback = function()
+    -- Récupère la couleur orange du groupe DiagnosticWarn du thème actuel
+    local warn_hl = vim.api.nvim_get_hl(0, { name = "DiagnosticWarn" })
+    vim.api.nvim_set_hl(0, "Whitespace", { fg = warn_hl.fg })
+  end,
+})
