@@ -16,7 +16,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Configuration de lazy.nvim et importation du répertoire `plugins`
-require("lazy").setup({ { import = "plugins" }, { import = "plugins.lsp"} }, {
+require("lazy").setup({ { import = "plugins" }, { import = "plugins.lsp" } }, {
   checker = { -- lualine va se charger de nous afficher un icône
     enabled = true,
     notify = false,
@@ -27,4 +27,3 @@ require("lazy").setup({ { import = "plugins" }, { import = "plugins.lsp"} }, {
     notify = false,
   },
 })
-

@@ -5,7 +5,7 @@ vim.g.mapleader = " "
 local keymap = vim.keymap.set
 
 keymap("i", ";;", "<ESC>", { desc = "Sortir du mode insertion avec ;;" })
-keymap("n", "<leader> ", ":nohl<CR>", { desc = "Effacer le surlignage de la recherche" })
+keymap("n", "<leader><Space>", ":nohl<CR>", { desc = "Effacer le surlignage de la recherche" })
 
 -- Changement de fenêtre avec Ctrl + déplacement uniquement au lieu de Ctrl-w + déplacement
 keymap("n", "<C-h>", "<C-w>h", { desc = "Déplace le curseur dans la fenêtre de gauche" })
@@ -16,4 +16,3 @@ keymap("n", "<C-l>", "<C-w>l", { desc = "Déplace le curseur dans la fenêtre dr
 -- Navigation entre les buffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
-
