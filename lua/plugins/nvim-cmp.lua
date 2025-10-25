@@ -2,8 +2,8 @@ return {
   "hrsh7th/nvim-cmp",
   event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
-    "hrsh7th/cmp-buffer", -- source pour compléter le texte déjà présent dans le buffer
-    "hrsh7th/cmp-path", -- source pour compléter les chemins des fichiers
+    "hrsh7th/cmp-buffer",  -- source pour compléter le texte déjà présent dans le buffer
+    "hrsh7th/cmp-path",    -- source pour compléter les chemins des fichiers
     "hrsh7th/cmp-cmdline", -- source pour les completions de la cmdline de vim
     {
       "L3MON4D3/LuaSnip",
@@ -12,10 +12,10 @@ return {
       -- install jsregexp (optional!).
       build = "make install_jsregexp",
     },
-    "saadparwaiz1/cmp_luasnip", -- ajoute LuaSnip à l'autocompletion
+    "saadparwaiz1/cmp_luasnip",     -- ajoute LuaSnip à l'autocompletion
     "rafamadriz/friendly-snippets", -- collection de snippets pratiques
-    "hrsh7th/cmp-emoji", -- complétion d'émojis à la saisie de :
-    "onsails/lspkind.nvim", -- vs-code pictogrammes
+    "hrsh7th/cmp-emoji",            -- complétion d'émojis à la saisie de :
+    "onsails/lspkind.nvim",         -- vs-code pictogrammes
   },
   config = function()
     local cmp = require("cmp")
@@ -37,23 +37,29 @@ return {
         end,
       },
       mapping = {
-        ["<C-k>"] = cmp.mapping.select_prev_item(),
-        ["<C-j>"] = cmp.mapping.select_next_item(),
-        ["<C-b>"] = cmp.mapping.scroll_docs(-1),
-        ["<C-f>"] = cmp.mapping.scroll_docs(1),
-        ["<C-Space>"] = cmp.mapping.complete(),
-        ["<C-e>"] = cmp.mapping.abort(),
-        ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accepte la sélection courante. Mettre à `false` pour ne confirmer que les items explicitement sélectionnés
+        ['<C-p>'] = cmp.mapping.select_prev_item(),
+        ['<C-n>'] = cmp.mapping.select_next_item(),
+        -- Add tab support
+        ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+        ['<Tab>'] = cmp.mapping.select_next_item(),
+        ['<C-S-f>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.close(),
+        ['<CR>'] = cmp.mapping.confirm({
+          behavior = cmp.ConfirmBehavior.Insert,
+          select = true,
+        })
       },
 
       -- sources pour l'autocompletion
       sources = cmp.config.sources({
         { name = "nvim_lsp" }, -- lsp
         { name = "nvim_lua" },
-        { name = "luasnip" }, -- snippets
-        { name = "buffer" }, -- texte du buffer courant
-        { name = "path" }, -- chemins dy système de fichier
-        { name = "emoji" }, -- emojis
+        { name = "luasnip" },  -- snippets
+        { name = "buffer" },   -- texte du buffer courant
+        { name = "path" },     -- chemins dy système de fichier
+        { name = "emoji" },    -- emojis
       }),
 
       formatting = {
@@ -98,7 +104,5 @@ return {
         },
       }),
     })
-
   end,
 }
-
