@@ -45,3 +45,20 @@ opt.iskeyword:append("-") -- on traite les mots avec des - comme un seul mot
 opt.list = true
 opt.listchars:append({ nbsp = "␣", trail = "•", precedes = "«", extends = "»", tab = "> " })
 
+-- Auto-commandes
+-- Définit la syntaxe XML pour les fichiers .ofx
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = "*.ofx",
+  callback = function()
+    vim.bo.syntax = "xml"
+  end,
+})
+
+-- Définit le filetype javascript pour les fichiers .js.erb
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = "*.js.erb",
+  callback = function()
+    vim.bo.filetype = "javascript"
+  end,
+})
+
