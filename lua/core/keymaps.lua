@@ -17,6 +17,25 @@ keymap("n", "<C-l>", "<C-w>l", { desc = "Déplace le curseur dans la fenêtre dr
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
+-- Commande pour recharger la configuration
+vim.api.nvim_create_user_command("ReloadConfig", function()
+  -- Sauvegarde le thème actuel
+  local current_colorscheme = vim.g.colors_name
+  -- Vide le cache des modules Lua
+  for name, _ in pairs(package.loaded) do
+    if name:match("^core") or name:match("^config") or name:match("^plugins") then
+      package.loaded[name] = nil
+    end
+  end
+  -- Recharge init.lua
+  dofile(vim.env.MYVIMRC)
+  -- Recharge le colorscheme actuel
+  if current_colorscheme then
+    vim.cmd("colorscheme " .. current_colorscheme)
+  end
+  print("Configuration rechargée!")
+end, {})
+
 -- Macros Vim
 -- @j - descend d'une ligne et répète la dernière commande
 vim.fn.setreg('j', 'j.')
