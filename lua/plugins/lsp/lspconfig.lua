@@ -120,6 +120,28 @@ return {
         },
       },
     })
+
+    -- Ruby
+    vim.lsp.config("ruby_lsp", {
+      filetypes = { "ruby", "eruby", "erb", "arb" },
+      root_dir = function(fname)
+        local util = require("lspconfig.util")
+        return util.root_pattern("Gemfile", ".git", "config/routes.rb")(fname)
+      end,
+      init_options = {
+        formatter = "standard",
+        linters = { "standard" },
+        enabledFeatures = {
+          "documentHighlights",
+          "documentSymbols",
+          "foldingRanges",
+          "selectionRanges",
+          "semanticHighlighting",
+          "formatting",
+          "codeActions",
+        },
+      },
+    })
   end,
 }
 
