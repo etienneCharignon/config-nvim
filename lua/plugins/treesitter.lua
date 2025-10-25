@@ -28,6 +28,7 @@ return {
         "rst",
         "ruby",
         "rust",
+        "toml",
         "typescript",
         "vim",
         "yaml",
@@ -46,4 +47,3 @@ return {
     })
   end,
 }
-

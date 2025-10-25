@@ -35,6 +35,7 @@ return {
         "html",
         "lua_ls",
         "pylsp",
+        "ruby",
         "ruff",
         "rust_analyzer",
         "sqlls",
@@ -45,4 +46,3 @@ return {
     })
   end,
 }
-
