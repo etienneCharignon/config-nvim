@@ -62,6 +62,14 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   end,
 })
 
+-- Définit le filetype ruby pour les fichiers .html.arb
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = "*.arb",
+  callback = function()
+    vim.bo.filetype = "ruby"
+  end,
+})
+
 -- Colore les espaces en fin de ligne et insécables en warning
 vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
   callback = function()
