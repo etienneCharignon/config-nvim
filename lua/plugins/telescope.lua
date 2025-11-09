@@ -36,6 +36,12 @@ return {
 
     keymap.set(
       "n",
+      "<C-p>",
+      "<cmd>Telescope find_files<cr>",
+      { desc = "Recherche de chaînes de caractères dans les noms de fichiers" }
+    )
+    keymap.set(
+      "n",
       "<leader>ff",
       "<cmd>Telescope find_files<cr>",
       { desc = "Recherche de chaînes de caractères dans les noms de fichiers" }
