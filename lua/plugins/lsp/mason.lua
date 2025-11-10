@@ -34,7 +34,7 @@ return {
         "graphql",
         "html",
         "lua_ls",
-        "pylsp",
+        "basedpyright",
         "ruby_lsp",
         "ruff",
         "rust_analyzer",

@@ -55,29 +55,20 @@ return {
       },
     })
     -- Python
-    vim.lsp.config("pylsp", {
+    vim.lsp.config("basedpyright", {
       settings = {
-        pylsp = {
-          plugins = {
-            -- formatter options
-            black = { enabled = true },
-            autopep8 = { enabled = false },
-            yapf = { enabled = false },
-            -- linter options
-            pyflakes = { enabled = false },
-            pycodestyle = {
-              enabled = true,
-              ignore = { "E501" },
-            },
-            -- type checker
-            pylsp_mypy = { enabled = true },
-            -- auto-completion options
-            jedi_completion = { fuzzy = true },
-            -- import sorting
-            pylsp_isort = { enabled = true },
-            rope_completion = { enabled = true },
-            rope_autoimport = {
-              enabled = true,
+        basedpyright = {
+          analysis = {
+            -- Type checking mode
+            typeCheckingMode = "standard", -- "off" | "basic" | "standard" | "strict" | "all"
+            -- Diagnostics options
+            useLibraryCodeForTypes = true,
+            autoSearchPaths = true,
+            diagnosticMode = "workspace",
+            -- Disable specific rules
+            diagnosticSeverityOverrides = {
+              reportUnusedVariable = "warning",
+              reportUnusedImport = "warning",
             },
           },
         },
