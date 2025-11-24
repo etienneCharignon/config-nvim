@@ -1,3 +1,19 @@
+local grep_in_selected = function(prompt_bufnr)
+  local actions_state = require("telescope.actions.state")
+  local from_entry = require("telescope.from_entry")
+  local builtin = require("telescope.builtin")
+
+  local selected = {}
+  for s in actions_state.get_current_picker(prompt_bufnr).manager:iter() do
+    local filename = from_entry.path(s, false, false)
+    table.insert(selected, filename)
+  end
+
+  builtin.live_grep({
+    search_dirs = selected,
+  })
+end
+
 return {
   "nvim-telescope/telescope.nvim",
   branch = "0.1.x",
@@ -24,6 +40,7 @@ return {
           i = {
             ["<C-j>"] = actions.move_selection_next,
             ["<C-k>"] = actions.move_selection_previous,
+            ["<C-g>"] = grep_in_selected,
           },
         },
       },
