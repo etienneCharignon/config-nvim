@@ -4,6 +4,7 @@ return {
   version = "*",
   opts = {
     options = {
+      mode = "tabs",
       separator_style = "slant",
       offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
     },
