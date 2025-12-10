@@ -75,6 +75,8 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
   callback = function()
     -- Récupère la couleur orange du groupe DiagnosticWarn du thème actuel
     local warn_hl = vim.api.nvim_get_hl(0, { name = "DiagnosticWarn" })
+    local more_msg = vim.api.nvim_get_hl(0, { name = "MoreMsg" })
     vim.api.nvim_set_hl(0, "Whitespace", { fg = warn_hl.fg })
+    vim.api.nvim_set_hl(0, "LineNr", { fg = more_msg.fg })
   end,
 })
