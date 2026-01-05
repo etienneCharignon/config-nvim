@@ -24,11 +24,17 @@ return {
         typescriptreact = { "prettier" },
         yaml = { "prettier" },
       },
-      format_on_save = {
-        lsp_fallback = true,
-        async = false,
-        timeout_ms = 1000,
-      },
+      format_on_save = function(bufnr)
+        -- Désactiver le format automatique pour Python
+        if vim.bo[bufnr].filetype == "python" then
+          return
+        end
+        return {
+          lsp_fallback = true,
+          async = false,
+          timeout_ms = 1000,
+        }
+      end,
     })
 
     vim.keymap.set({ "n", "v" }, "<leader>mp", function()
